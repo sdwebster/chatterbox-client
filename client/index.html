@@ -17,26 +17,32 @@
 
     <script src="env/config.js"></script>
     <script src="scripts/app.js"></script>
+    <script src="scripts/load.js"></script>
   </head>
   <body>
-    <div id="main">
-      <h1>chatterbox</h1>
-      <!-- Your HTML goes here! -->
-      <button type="button" class="btn btn-primary" id="clear">Clear chat</button>
 
-      <form class="form-inline">
-        <!-- <div class="form-group">
-          <label for="inputUserName"></label>
-          <input type="text" class="form-control" id="inputUserName" placeholder="username">
-        </div> -->
-        <div class="form-group">
-          <label for="inputMessage"></label>
-          <input type="text" class="form-control" id="inputChat" placeholder="message">
-        </div>
-        <button type="submit" class="btn btn-primary" id="submitChat">Submit Chat</button>
-      </form>
+    <h1>chatterbox</h1>
+    <div class="row">
+      <div id="roomlist" class="col-md-3">
+        <form class="form-inline">
+         <div class="form-group">
+            <input type="text" class="form-control" id="inputRoom" placeholder="add new room">
+          </div>
+          <button type="submit" class="btn btn-primary" id="roomSelect">Add Room</button>
+        </form>
+      </div>
 
-      <div id="chats"></div>
+      <div id="main" class="col-md-9">
+        <button type="button" class="btn btn-primary" id="clear">Clear chat</button>
+
+        <form class="form-inline">
+          <div class="form-group">
+            <input type="text" class="form-control" id="inputChat" placeholder="message">
+          </div>
+          <button type="submit" class="btn btn-primary" id="submitChat">Submit Chat</button>
+        </form>
+        <div id="chats"></div>
+      </div>
 
     </div>
   </body>

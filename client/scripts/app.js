@@ -2,21 +2,6 @@
 
 var app = {};
 
-$(document).ready(function() {
-  $('#clear').click(app.clearMessages);
-  $('#submitChat').click(function(event){
-    event.preventDefault();
-    var message = {};
-    message.username = window.location.search.substring(window.location.search.indexOf('=')+1)
-"anonymous";
-    message.text = $('#inputChat').text();
-   // message.createdAt =
-    message.roomname = 'lobby';
-    console.log(message);
-    app.send(message);
-  });
-});
-
 app.server = 'https://api.parse.com/1/classes/chatterbox';
 
 app.init = function() {
@@ -44,16 +29,20 @@ app.send = function(message) {
 };
 
 app.fetch = function() {
+  // console.log('how fetching!');
   $.ajax({
     url: this.server + '?order=-createdAt',
     type: 'GET',
     contentType: 'application/json',
     success: function (data) {
-      console.log(JSON.stringify(data)/*.username.split("")*/);
+      // console.log(JSON.stringify(data)/*.username.split("")*/);
+      app.clearMessages();
       _.each(data.results,function(message){
         var newMessage = $('<div class="chat"></div>');
         newMessage.append('<div class="username">' + _.escape(message.username) + '</div>');
         newMessage.append('<div class="text">' + _.escape(message.text) + '</div>');
+        newMessage.append('<div class="time">' + _.escape(new Date(message.createdAt)) + '</div>');
+        newMessage.append('<div class="room">' + _.escape(message.roomname) + '</div>');
 
         $('#chats').append(newMessage);
       });
@@ -69,4 +58,4 @@ app.clearMessages = function() {
   $('#chats').empty();
 };
 
-app.init();
+//
