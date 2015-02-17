@@ -4,11 +4,17 @@
     <meta charset="utf-8">
     <title>chatterbox</title>
     <link rel="stylesheet" href="styles/styles.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 
+
+    <!-- <link rel="stylesheet" href='bower_components/bootstrap/dist/css/bootstrap-theme.min.css'> -->
     <!-- dependencies -->
     <script src="bower_components/jquery/jquery.min.js"></script>
     <script src="bower_components/underscore/underscore-min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
     <!-- your scripts -->
+
     <script src="env/config.js"></script>
     <script src="scripts/app.js"></script>
   </head>
@@ -16,7 +22,22 @@
     <div id="main">
       <h1>chatterbox</h1>
       <!-- Your HTML goes here! -->
+      <button type="button" class="btn btn-primary" id="clear">Clear chat</button>
+
+      <form class="form-inline">
+        <!-- <div class="form-group">
+          <label for="inputUserName"></label>
+          <input type="text" class="form-control" id="inputUserName" placeholder="username">
+        </div> -->
+        <div class="form-group">
+          <label for="inputMessage"></label>
+          <input type="text" class="form-control" id="inputChat" placeholder="message">
+        </div>
+        <button type="submit" class="btn btn-primary" id="submitChat">Submit Chat</button>
+      </form>
+
       <div id="chats"></div>
+
     </div>
   </body>
 </html>
