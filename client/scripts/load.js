@@ -3,6 +3,7 @@ $(document).ready(function() {
 
   $('#clear').click(app.clearMessages);
 
+
   $('#submitChat').click(function(event){
     event.preventDefault();
     var message = {};
@@ -16,4 +17,20 @@ $(document).ready(function() {
   });
 
   setInterval(app.fetch.bind(app),500);
+
+
+  $('#roomSelect').on('click', 'a', function(event){
+    event.preventDefault();
+    app.selectedRoom = $(this).text();
+    console.log(app.selectedRoom);
+  });
+
+  $('#chats').on('click', '.username', function(event){
+    event.preventDefault();
+    app.addFriend($(this).text());
+    console.log('added'+$(this).text());
+  });
+
+
+
 });

@@ -24,14 +24,17 @@
     <h1>chatterbox</h1>
     <div class="row">
       <div id="roomlist" class="col-md-3">
-        <form class="form-inline">
-         <div class="form-group">
-            <input type="text" class="form-control" id="inputRoom" placeholder="add new room">
-          </div>
-          <button type="submit" class="btn btn-primary" id="roomSelect">Add Room</button>
-        </form>
+        <h2>Rooms</h2>
+        <ul class="nav nav-pills" id="roomSelect">
+          <li role="presentation" id="All" class="active"><a href="#">All</a></li>
+        </ul>
       </div>
-
+      <button id="addNewRoom">Add a new chatroom
+      </button>
+      <div id="friendlist">
+        <h2>Friends</h2>
+        <ul class="nav nav-pills" id="friends"></ul>
+      </div>
       <div id="main" class="col-md-9">
         <button type="button" class="btn btn-primary" id="clear">Clear chat</button>
 
@@ -43,7 +46,6 @@
         </form>
         <div id="chats"></div>
       </div>
-
     </div>
   </body>
 </html>

@@ -8,6 +8,10 @@ app.init = function() {
   this.fetch();
 };
 
+app.rooms = {};
+app.selectedRoom = 'All';
+app.friends = {};
+
 app.send = function(message) {
   console.log('enter app.send method');
   $.ajax({
@@ -26,6 +30,7 @@ app.send = function(message) {
     }
   });
 
+
 };
 
 app.fetch = function() {
@@ -38,14 +43,31 @@ app.fetch = function() {
       // console.log(JSON.stringify(data)/*.username.split("")*/);
       app.clearMessages();
       _.each(data.results,function(message){
-        var newMessage = $('<div class="chat"></div>');
-        newMessage.append('<div class="username">' + _.escape(message.username) + '</div>');
-        newMessage.append('<div class="text">' + _.escape(message.text) + '</div>');
-        newMessage.append('<div class="time">' + _.escape(new Date(message.createdAt)) + '</div>');
-        newMessage.append('<div class="room">' + _.escape(message.roomname) + '</div>');
+        var room = _.escape(message.roomname);
+        if (app.selectedRoom === 'All' || room === app.selectedRoom){
+          var userName = _.escape(message.username);
+          var messageDiv;
+          if (app.friends.hasOwnProperty(userName)){
+            messageDiv = '<div class="chat friend"></div>';
+          } else {
+            messageDiv = '<div class="chat"></div>';
+          }
+          var newMessage = $(messageDiv);
+          newMessage.append('<div class="username">' + userName + '</div>');
+          newMessage.append('<div class="text">' + _.escape(message.text) + '</div>');
+          newMessage.append('<div class="time">' + _.escape(new Date(message.createdAt)) + '</div>');
+          newMessage.append('<div class="room">' + room + '</div>');
+          $('#chats').append(newMessage);
+          if(! app.rooms.hasOwnProperty(room)){
+            app.rooms[room] = room;
+            app.addRoom(room);
+          }
 
-        $('#chats').append(newMessage);
+        }
       });
+      // $('#roomSelect').empty();
+      // _.each(app.rooms, function(val){
+      // });
     },
     error: function (data) {
       // see: https://developer.mozilla.org/en-US/docs/Web/API/console.error
@@ -54,8 +76,17 @@ app.fetch = function() {
   });
 };
 
+app.addRoom = function(roomname) {
+  $('#roomSelect').append('<li role="presentation" id="' + roomname + '"><a href="#">'+roomname+'</a></li>');
+};
+
+app.addFriend = function(friend) {
+  if(! app.friends.hasOwnProperty(friend)){
+    app.friends[friend] = friend;
+    $('#friends').append('<li id="' + friend + '"><a href="#">'+friend+'</a></li>');
+  }
+};
+
 app.clearMessages = function() {
   $('#chats').empty();
 };
-
-//
